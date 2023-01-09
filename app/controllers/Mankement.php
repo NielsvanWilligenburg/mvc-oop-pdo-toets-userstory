@@ -13,14 +13,24 @@ class Mankement extends Controller {
 
         $instructeur = $this->overzichtModel->getInstructeurs();
 
-        echo $instructeur->Naam;
+        $mankementen = $this->overzichtModel->getMankementen();
+
+        $rows = '';
+
+        foreach($mankementen as $mankementen) {
+            $rows .= "<tr>
+                        <td>$mankementen->Datum</td>
+                        <td>$mankementen->Mankement</td>
+                    </tr>";
+        }
     
         $data = [
             'title' => 'Overzicht Mankementen',
             'naam' => $instructeur->Naam,
             'email' => $instructeur->Email,
             'kenteken' => $instructeur->Kenteken,
-            'type' => $instructeur->Type
+            'type' => $instructeur->Type,
+            'rows' => $rows
         ];
 
         $this->view('mankement/overzicht', $data);
