@@ -37,9 +37,10 @@ class Mankementen extends Controller
 
     public function addMankement($data)
     {
-        $this->db->query('INSERT INTO `mankement` (`Id`, `Datum`, `Mankement`) VALUES (NULL, :datum, :mankement)');
+        $this->db->query('INSERT INTO `mankement` (`Id`, `Datum`, `Mankement`, `AutoId`) VALUES (NULL, :datum, :mankement :AutoId)');
         $this->db->bind(':datum', date('Y-m-d'));
         $this->db->bind(':mankement', $data['mankement']);
+        $this->db->bind(':AutoId', $data['autoId']);
         $this->db->execute();
     }
 
