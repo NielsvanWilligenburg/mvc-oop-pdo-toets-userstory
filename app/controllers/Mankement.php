@@ -1,6 +1,7 @@
 <?php
 
-class Mankement extends Controller {
+class Mankement extends Controller
+{
 
     private $overzichtModel;
 
@@ -9,7 +10,8 @@ class Mankement extends Controller {
         $this->overzichtModel = $this->model('mankementen');
     }
 
-    public function index() {
+    public function index()
+    {
 
         $instructeur = $this->overzichtModel->getInstructeurs();
 
@@ -17,13 +19,13 @@ class Mankement extends Controller {
 
         $rows = '';
 
-        foreach($mankementen as $mankementen) {
+        foreach ($mankementen as $mankementen) {
             $rows .= "<tr>
                         <td>$mankementen->Datum</td>
                         <td>$mankementen->Mankement</td>
                     </tr>";
         }
-    
+
         $data = [
             'title' => 'Overzicht Mankementen',
             'naam' => $instructeur->Naam,
@@ -36,4 +38,26 @@ class Mankement extends Controller {
         $this->view('mankement/overzicht', $data);
     }
 
+    public function detail()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            var_dump($_POST);
+
+            $this->overzichtModel->addMankement($_POST);
+
+        } else {
+            $instructeur = $this->overzichtModel->getInstructeurs();
+
+            $data = [
+                'title' => 'Mankement toevoegen',
+                'kenteken' => $instructeur->Kenteken,
+                'type' => $instructeur->Type,
+            ];
+
+            $this->view('mankement/detail', $data);
+        }
+    }
 }

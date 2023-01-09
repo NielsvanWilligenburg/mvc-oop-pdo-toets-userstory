@@ -1,4 +1,4 @@
-<h1><?= $data['title']?></h1>
+<h1><u><?= $data['title']?></u></h1>
 
 
 <h3>Auto van instructeur: <?= $data['naam'] ?> </h3>
@@ -16,3 +16,5 @@
        <?= $data['rows'] ?>
     </tbody>
 </table>
+
+<a href="<?= URLROOT ?>/mankement/detail">Mankement toevoegen</a>

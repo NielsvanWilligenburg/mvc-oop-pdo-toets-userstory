@@ -35,4 +35,12 @@ class Mankementen extends Controller
         return $results;
     }
 
+    public function addMankement($data)
+    {
+        $this->db->query('INSERT INTO `mankement` (`Id`, `Datum`, `Mankement`) VALUES (NULL, :datum, :mankement)');
+        $this->db->bind(':datum', date('Y-m-d'));
+        $this->db->bind(':mankement', $data['mankement']);
+        $this->db->execute();
+    }
+
 }
